@@ -9,23 +9,17 @@ class Login_C extends Controller
   function CekLogin()
   {
     $email = $this->load->post('email');
-    $password = $this->load->post('password');
-
+    $password = $this->load->post('pass');
     $model = $this->load->model('Login_M');
     $data = $model->ambildata($email);
-
-    if ($data) {
-      if ($password == $data['password']) {
-        session_start();
-        $_SESSION['username'] = $data['username'];
-        $_SESSION['status'] = 'login';
-        header('Location: ?url=Latihan1Controller/index');
-        exit;
-      } else {
-        echo "<script>alert('Password Salah!'); window.location='?url=Login_C/index';</script>";
-      }
+    
+    if ($data && password_verify($password, $data['password'])) {
+        $this->session->set_userdata('emailuser', $email);
+        $this->session->set_flashdata('pesan', 'Login berhasil sebagai ' . $this->session->userdata('emailuser'));
+        redirect('Admin_C/index');
     } else {
-      echo "<script>alert('Email Tidak Ditemukan!'); window.location='?url=Login_C/index';</script>";
+        $this->session->set_flashdata('pesan', 'Gagal: Silahkan cek email, password, atau status akun Anda...');
+        redirect('Login_C/index');
     }
   }
 }
