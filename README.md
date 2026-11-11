@@ -1,13 +1,11 @@
-# dpwl-Mesi074
-repository pertemuan 1 sampai dengan pertemuan 16,2026 Ganjil
-![logo ISB](logo.png)
-membuat autoload pertemuan 3 
-mengcopy file login c php di file controller
-password dan session telah berhasil push semua nya
-tambah function simpan di Mobil_M dan benerin redirect Mobil_C"GI
-materi baru : Shopping
-membuat layoutshop untuk halaman shopping
-membuat slidershop untuk slider di halaman shopping
-membuat Shopping_C di file controller untuk halaman shopping
-tampilan shopping sudah berhasil, login penyewa sudah tampil di shopping
-home shopping belum dibuat, karena belum masuk materi
+# Laporan Progress DPWL - Mesi074 pertemuan ke 1 sampai 16
+
+- Membuat autoload pertemuan 3
+- Mengcopy file login_c.php di file controller, password dan session telah berhasil push semuanya
+- Tambah function simpan di Mobil_M dan benerin redirect Mobil_C
+- GI materi baru : Shopping
+- Membuat layoutshop untuk halaman shopping
+- Membuat slidershop untuk slider di halaman shopping
+- Membuat Shopping_C di file controller untuk halaman shopping
+- Tampilan shopping sudah berhasil, login penyewa sudah tampil di shopping
+- Home shopping belum dibuat, karena belum masuk materi
