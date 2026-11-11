@@ -98,4 +98,4 @@
   }
   document.getElementById('ft_ktp074').addEventListener('change', function(){ previewImage(this, 'preview_ktp074'); });
   document.getElementById('ft_sim_a074').addEventListener('change', function(){ previewImage(this, 'preview_sim_a074'); });
-</script>
+</script>git
