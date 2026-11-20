@@ -5,7 +5,15 @@ require_once 'config/config.php';
 require_once 'helper/url_helper.php';
 require_once 'config/session.php';
 
-$url = $_GET['url']?? $route['default_controller']. '/index';
+// Ambil URL dari ?url= ATAU dari /index.php/shopping/detail/...
+if (!empty($_GET['url'])) {
+    $url = $_GET['url'];
+} elseif (!empty($_SERVER['PATH_INFO'])) {
+    $url = trim($_SERVER['PATH_INFO'], '/');
+} else {
+    $url = $route['default_controller']. '/index';
+}
+
 $url = trim($url, '/');
 $segment = explode('/', $url);
 
@@ -19,12 +27,11 @@ if (count($segment) >= 2 && is_dir('controller/'. $segment[0])) {
     $controllerFile = 'controller/'. $folder. '/'. $controller. '.php';
     $controllerName = $controller;
 } else {
-    // GAK ADA FOLDER MISAL: Login_C/index (punya kamu yang lama)
+    // GAK ADA FOLDER MISAL: Login_C/index
     $controller = $segment[0]?? $route['default_controller'];
     $method = $segment[1]?? 'index';
     $parameter = $segment[2]?? null;
 
-    // Biar Login_C tetap Login_C
     if (strtolower($controller) === 'login_c') {
         $controllerName = 'Login_C';
     } else {
@@ -38,7 +45,7 @@ if (file_exists($controllerFile)) {
     $objController = new $controllerName();
     if (method_exists($objController, $method)) {
         if ($parameter!== null) {
-            $objController->$method($parameter);
+            $objController->$method(urldecode($parameter));
         } else {
             $objController->$method();
         }
